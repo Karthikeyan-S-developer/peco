@@ -348,6 +348,9 @@ export default function App() {
           ) : null}
         </div>
       )}
+
+      <div className="footer-note">Crafted by SK</div>
+
     </div>
   );
 }
