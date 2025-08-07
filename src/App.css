@@ -1,0 +1,321 @@
+/* Base Reset and Layout */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #111831;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.login-box,
+.chat-box {
+  background: #0f3460;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 900px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.login-box input {
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-box button {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: #e94560;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.user-list {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  overflow-x: hidden;
+}
+
+.chat-line {
+  width: 100%;
+  display: flex;
+  margin: 0.5rem 0;
+}
+
+.chat-line.sent {
+  justify-content: flex-end;
+}
+
+.chat-line.received {
+  justify-content: flex-start;
+}
+
+.chat-message {
+  background: #16213e;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  word-break: break-word;
+  max-width: 50%;
+  display: inline-block;
+  width: fit-content;
+  font-size: 14px;
+}
+
+.sender-name {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: #ffffff;
+}
+
+.chat-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px solid #2c3e50;
+  background-color: #0f3460;
+}
+
+.input-row input[type="text"] {
+    display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #1a1a2e;
+  color: white;
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.input-row input[type="text"]:focus {
+  box-shadow: 0 0 0 2px #e94560;
+}
+
+.input-row input[type="file"] {
+  flex: 0 0 auto;
+  max-width: 150px;
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.4rem;
+  border: 1px solid #2c3e50;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.input-row input[type="file"]::-webkit-file-upload-button {
+  background: #e94560;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.6rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.input-row button {
+  background: #e94560;
+  padding: 0.7rem 1.2rem;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.input-row button:hover {
+  background: #d73753;
+}
+
+
+.preview-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.preview-popup img,
+.preview-popup video {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #fff;
+}
+
+.audio-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #1a223f; /* Slightly lighter & richer */
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  max-width: 6cm;
+  width: 100%;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+.audio-button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background-color: #e94560;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  padding-bottom: 4px;
+  padding-left: 7px;
+}
+
+.audio-button:hover {
+  background-color: #ff5b73;
+}
+
+.audio-seek {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 6px;
+  outline: none;
+  background: linear-gradient(to right, #e94560 0%, #444 0%);
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+/* Dynamically set the background using inline style in React */
+
+.audio-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5b73;
+  cursor: pointer;
+  margin-top: 0px;
+  box-shadow: 0 0 0 2px #1a223f;
+}
+
+.audio-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5b73;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px #1a223f;
+}
+
+
+/* Scrollbar styles */
+.chat-window::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-window::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 5px;
+}
+.chat-window::-webkit-scrollbar-track {
+  background-color: #222;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .chat-message {
+    max-width: 100%;
+  }
+
+  .audio-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* Add this at the end of your App.css */
+.file-upload-label {
+  background-color: #e94560;
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-label:hover {
+  background-color: #d73753;
+}
+
+.file-upload-label input[type="file"] {
+  display: none;
+}
+
