@@ -319,3 +319,12 @@ body {
   display: none;
 }
 
+.footer-note {
+  position: fixed;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  z-index: 999;
+}
