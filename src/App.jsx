@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import './App.css';
 
-const socket = io("https://chat-server-fjcm.onrender.com");
+const socket = io("https://chat-server-fjcm.onrender.com/");
 
 // ---------------- Encryption Helpers ----------------
 const deriveKey = async (password) => {
