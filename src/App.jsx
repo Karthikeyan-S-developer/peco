@@ -15,7 +15,7 @@ const deriveKey = async (password) => {
     ["deriveKey"]
   );
 
-  const salt = encoder.encode("static-salt"); // Optional: make dynamic per room
+  const salt = encoder.encode("static-salt");
   return await window.crypto.subtle.deriveKey(
     {
       name: "PBKDF2",
@@ -184,7 +184,7 @@ export default function App() {
 
   const joinRoom = async () => {
     if (!username.trim() || !room.trim()) return;
-    const key = await deriveKey(room); // you can use a separate passphrase if preferred
+    const key = await deriveKey(room);
     setCryptoKey(key);
     socket.emit('joinRoom', { username, room });
     setJoined(true);
@@ -205,11 +205,19 @@ export default function App() {
     };
 
     if (file) {
-      msg.file = {
-        name: file.name,
-        type: file.type,
-        url: URL.createObjectURL(file), // not encrypted
+      const reader = new FileReader();
+      reader.onload = () => {
+        msg.file = {
+          name: file.name,
+          type: file.type,
+          data: reader.result, // base64 data
+        };
+        socket.emit('message', msg);
       };
+      reader.readAsDataURL(file);
+      setMessage('');
+      setFile(null);
+      return;
     }
 
     socket.emit('message', msg);
@@ -280,23 +288,23 @@ export default function App() {
                     <>
                       {msg.file.type.startsWith('image') && (
                         <img
-                          src={msg.file.url}
+                          src={msg.file.data}
                           className="chat-image"
-                          onClick={() => openPreview(msg.file.url, 'image')}
+                          onClick={() => openPreview(msg.file.data, 'image')}
                           alt="sent-img"
                         />
                       )}
                       {msg.file.type.startsWith('video') && (
                         <video
-                          src={msg.file.url}
+                          src={msg.file.data}
                           controls
                           className="chat-image"
-                          onClick={() => openPreview(msg.file.url, 'video')}
+                          onClick={() => openPreview(msg.file.data, 'video')}
                         />
                       )}
                       {msg.file.type.startsWith('audio') && (
                         <AudioPlayer
-                          src={msg.file.url}
+                          src={msg.file.data}
                           index={i}
                           audioRefs={audioRefs}
                           onPlayOther={handleAudioPlay}
@@ -305,7 +313,7 @@ export default function App() {
                       {!msg.file.type.startsWith('image') &&
                         !msg.file.type.startsWith('video') &&
                         !msg.file.type.startsWith('audio') && (
-                          <a href={msg.file.url} download={msg.file.name}>
+                          <a href={msg.file.data} download={msg.file.name}>
                             📎 {msg.file.name}
                           </a>
                       )}
@@ -350,7 +358,6 @@ export default function App() {
       )}
 
       <div className="footer-note">Crafted by SK</div>
-
     </div>
   );
 }
